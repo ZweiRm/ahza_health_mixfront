@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="icon" type="image/x-icon" th:href="@{/img/favicon.ico}">
+    <!-- These meta tags come first. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Ahza健康</title>
+
+    <!-- Include the CSS -->
+    <link th:href="@{/css/toolkit-inverse.css}" rel="stylesheet">
+    <link th:href="@{/css/application.css}" rel="stylesheet">
+    <link th:href="@{/css/docs.css}" rel="stylesheet">
+    <style>
+        .fontBigger {
+            font-size: 1.3em;
+        }
+
+        .down {
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
+<div class="col-md-12">
+    <!--导航栏-->
+    <nav class="iconav">
+        <a class="iconav-brand" href="/goMain">
+            <img th:src="@{/img/ahza-white.png}" alt="ahzh" class="rounded-circle img-fluid">
+            <!--<span class="icon icon-gauge iconav-brand-icon"></span>-->
+        </a>
+        <div class="iconav-slider">
+            <ul class="nav nav-pills iconav-nav flex-md-column">
+                <li class="nav-item">
+                    <a class="nav-link" href="/goDashboard" title="仪表盘" data-toggle="tooltip" data-placement="right" data-container="body">
+                        <span class="icon icon-gauge"></span>
+                        <small class="iconav-nav-label d-md-none">仪表盘</small>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/goHealth" title="健康数据" data-toggle="tooltip" data-placement="right" data-container="body">
+                        <span class="icon icon-man"></span>
+                        <small class="iconav-nav-label d-md-none">健康数据</small>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="/goGene" title="基因数据" data-toggle="tooltip" data-placement="right" data-container="body">
+                        <span class="icon icon-lab-flask"></span>
+                        <small class="iconav-nav-label d-md-none">基因数据</small>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/logout" title="登出系统" data-toggle="tooltip" data-placement="right" data-container="body">
+                        <!--<img src="../assets/img/avatar-mdo.png" alt="" class="rounded-circle img-fluid">-->
+                        <span class="icon icon-log-out"></span>
+                        <small class="iconav-nav-label d-md-none">登出系统</small>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <!--主内容-->
+    <div class="container col-md-11">
+        <div class="docs-example">
+            <div class="statcard p-3">
+                <h3 class="statcard-number">
+                    <div th:if="${wegeneLactose.rank == '弱'}">
+                        <span th:text="${wegeneLactose.rank}"></span>
+                        <small class="delta-indicator delta-negative">弱</small>
+                    </div>
+                    <div th:if="${wegeneLactose.rank == '强'}">
+                        <span th:text="${wegeneLactose.rank}"></span>
+                        <small class="delta-indicator delta-positive">强</small>
+                    </div>
+                </h3>
+                <div class="down">
+                    <span class="statcard-desc fontBigger">乳糖代谢能力</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="docs-example">
+            <div class="statcard p-3">
+                <h3 class="statcard-number">
+                    <div th:if="${wegeneAthletigen.rank == '低'}">
+                        <span th:text="${wegeneAthletigen.rank}"></span>
+                        <small class="delta-indicator delta-negative">低</small>
+                    </div>
+                    <div th:if="${wegeneAthletigen.rank == '较低'}">
+                        <span th:text="${wegeneAthletigen.rank}"></span>
+                        <small class="delta-indicator delta-negative">较低</small>
+                    </div>
+                    <div th:if="${wegeneAthletigen.rank == '较高'}">
+                        <span th:text="${wegeneAthletigen.rank}"></span>
+                        <small class="delta-indicator delta-positive">较高</small>
+                    </div>
+                    <div th:if="${wegeneAthletigen.rank == '高'}">
+                        <span th:text="${wegeneAthletigen.rank}"></span>
+                        <small class="delta-indicator delta-positive">高</small>
+                    </div>
+                </h3>
+                <div class="down">
+                    <span class="statcard-desc fontBigger down">运动积极性</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script th:src="@{/js/jquery-3.3.1.js}"></script>
+<script th:src="@{/js/popper.js}"></script>
+<script th:src="@{/js/toolkit.js}"></script>
+<script th:src="@{/js/tablesorter.min.js}"></script>
+<script th:src="@{/js/application.js}"></script>
+</body>
+</html>

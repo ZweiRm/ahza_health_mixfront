@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="icon" type="image/x-icon" th:href="@{/img/favicon.ico}">
+    <!-- These meta tags come first. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>404</title>
+
+    <!-- Include the CSS -->
+    <link th:href="@{/css/toolkit-light.css}" rel="stylesheet">
+    <link th:href="@{/css/antd.css}" rel="stylesheet">
+    <style>
+        h1 {
+            color: #434e59;
+            font-size: 72px;
+            font-weight: 600;
+            line-height: 72px;
+            margin-bottom: 24px;
+        }
+
+        .desc {
+            color: rgba(0,0,0,.45);
+            font-size: 20px;
+            line-height: 28px;
+            margin-bottom: 16px;
+        }
+
+        .center {
+            height: 100%;
+            width: 100%;
+        }
+    </style>
+
+</head>
+<body>
+<div class="container center offset-3">
+    <div class="ant-layout-content form-inline center">
+        <img style="width: 400px;" alt="404" th:src="@{https://gw.alipayobjects.com/zos/rmsportal/KpnpchXsobRgLElEozzI.svg}">
+        <div class="ant-layout-content offset-1">
+            <h1>404</h1>
+            <div class="desc">抱歉，你访问的页面不存在</div>
+            <button class="ant-btn ant-btn-primary" onclick="window.location.href='/goMain'">返回首页</button>
+        </div>
+    </div>
+</div>
+
+<script th:src="@{/js/jquery-3.3.1.js}"></script>
+<script th:src="@{/js/popper.js}"></script>
+<script th:src="@{/js/toolkit.js}"></script>
+<script th:src="@{/js/component.js}"></script>
+<script th:src="@{/js/antd.js}"></script>
+</body>
+</html>

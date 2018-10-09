@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="icon" type="image/x-icon" th:href="@{/img/favicon.ico}">
+    <!-- These meta tags come first. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Ahza健康</title>
+
+    <!-- Include the CSS -->
+    <link th:href="@{/css/application.css}" rel="stylesheet">
+    <link th:href="@{/css/antd.css}" rel="stylesheet">
+    <link th:href="@{/css/toolkit-light.css}" rel="stylesheet">
+    <link th:href="@{/css/toolkit-inverse.css}" rel="stylesheet">
+    <style>
+        .imgBack {
+            background: url("https://www.wegene.com/static/dist/img/home-sports.jpg");
+            height: 100%;
+        }
+
+        .down {
+            top: 30em;
+        }
+
+        .right {
+            left: 40px;
+        }
+
+        .divBack {
+            top: 13px;
+            left: 35px;
+            height: 780px;
+        }
+
+        .downner {
+            margin-top: 35.5em;
+        }
+    </style>
+</head>
+<body>
+<div class="col-md-12">
+    <!--导航栏-->
+    <nav class="iconav">
+        <a class="iconav-brand" href="/goMain">
+            <img th:src="@{/img/ahza-white.png}" alt="ahzh" class="rounded-circle img-fluid">
+            <!--<span class="icon icon-gauge iconav-brand-icon"></span>-->
+        </a>
+        <div class="iconav-slider">
+            <ul class="nav nav-pills iconav-nav flex-md-column">
+                <li class="nav-item">
+                    <a class="nav-link" href="/goDashboard" title="仪表盘" data-toggle="tooltip" data-placement="right" data-container="body">
+                        <span class="icon icon-gauge"></span>
+                        <small class="iconav-nav-label d-md-none">仪表盘</small>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/goHealth" title="健康数据" data-toggle="tooltip" data-placement="right" data-container="body">
+                        <span class="icon icon-man"></span>
+                        <small class="iconav-nav-label d-md-none">健康数据</small>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="/goGene" title="基因数据" data-toggle="tooltip" data-placement="right" data-container="body">
+                        <span class="icon icon-lab-flask"></span>
+                        <small class="iconav-nav-label d-md-none">基因数据</small>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/logout" title="登出系统" data-toggle="tooltip" data-placement="right" data-container="body">
+                        <!--<img src="../assets/img/avatar-mdo.png" alt="" class="rounded-circle img-fluid">-->
+                        <span class="icon icon-log-out"></span>
+                        <small class="iconav-nav-label d-md-none">登出系统</small>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <!--主内容-->
+    <div class="container col-md-11 imgBack divBack">
+        <button class="btn btn-outline-primary col-md-5 offset-md-3 down right" onclick="window.location.href='https://api.wegene.com/authorize/?redirect_uri=http://localhost:8080/goGeneShow/&response_type=code&client_id=DGJ4qSqsR9V9tVPF&scope=basic health athletigen'">
+            <img th:src="@{https://api.wegene.com/static/img/logo.svg}">
+            <br/>
+            <span style="font-size: 3em">与 WeGene 链接</span>
+        </button>
+        <div class="downner">
+            <div class="ant-divider ant-divider-horizontal">
+                <h3 class="hr-divider-content hr-divider-heading"></h3>
+            </div>
+            <h6 class="">说明</h6>
+            <p class="">调用微基因API过程不可逆。流程中请不要使用刷新、后退、前进功能，否则会出现不可预料的结果。</p>
+        </div>
+    </div>
+</div>
+</div>
+<script th:src="@{/js/jquery-3.3.1.js}"></script>
+<script th:src="@{/js/popper.js}"></script>
+<script th:src="@{/js/toolkit.js}"></script>
+<script th:src="@{/js/tablesorter.min.js}"></script>
+<script th:src="@{/js/application.js}"></script>
+<script th:src="@{/js/component.js}"></script>
+<script th:src="@{/js/antd.js}"></script>
+</body>
+</html>

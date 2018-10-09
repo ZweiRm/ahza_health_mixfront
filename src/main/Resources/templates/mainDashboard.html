@@ -1,0 +1,1178 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="icon" type="image/x-icon" th:href="@{/img/favicon.ico}">
+    <!-- These meta tags come first. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Ahza健康</title>
+
+    <!-- Include the CSS -->
+    <link th:href="@{/css/antd.css}" rel="stylesheet">
+    <link th:href="@{/css/toolkit-inverse.css}" rel="stylesheet">
+    <link th:href="@{/css/application.css}" rel="stylesheet">
+    <link th:href="@{/css/docs.css}" rel="stylesheet">
+    <style>
+        .chart{
+            width: 500px;
+        }
+        .down {
+            margin-top: 1em;
+        }
+        .right {
+            left: 18px;
+        }
+    </style>
+</head>
+<body>
+<div class="col-md-12">
+    <!--导航栏-->
+    <nav class="iconav">
+        <a class="iconav-brand" href="/goMain">
+            <img th:src="@{/img/ahza-white.png}" alt="ahzh" class="rounded-circle img-fluid">
+            <!--<span class="icon icon-gauge iconav-brand-icon"></span>-->
+        </a>
+        <div class="iconav-slider">
+            <ul class="nav nav-pills iconav-nav flex-md-column">
+                <li class="nav-item">
+                    <a class="nav-link active" href="/goDashboard" title="仪表盘" data-toggle="tooltip" data-placement="right" data-container="body">
+                        <span class="icon icon-gauge"></span>
+                        <small class="iconav-nav-label d-md-none">仪表盘</small>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/goHealth" title="健康数据" data-toggle="tooltip" data-placement="right" data-container="body">
+                        <span class="icon icon-man"></span>
+                        <small class="iconav-nav-label d-md-none">健康数据</small>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/goGene" title="基因数据" data-toggle="tooltip" data-placement="right" data-container="body">
+                        <span class="icon icon-lab-flask"></span>
+                        <small class="iconav-nav-label d-md-none">基因数据</small>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/logout" title="登出系统" data-toggle="tooltip" data-placement="right" data-container="body">
+                        <!--<img src="../assets/img/avatar-mdo.png" alt="" class="rounded-circle img-fluid">-->
+                        <span class="icon icon-log-out"></span>
+                        <small class="iconav-nav-label d-md-none">登出系统</small>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <!--主体内容-->
+    <div class="container">
+        <!--营养摄入分割线-->
+        <div class="ant-divider ant-divider-horizontal">
+            <h3 class="hr-divider-content hr-divider-heading"></h3>
+        </div>
+        <h3>营养摄入</h3>
+
+        <div class="container">
+            <div class="ant-col-24">
+                <!--水分割线-->
+                <div class="hr-divider">
+                    <ul class="nav nav-pills hr-divider-content hr-divider-nav">
+                        <li class="nav-item">
+                            <p class="nav-link active down">水</p>
+                        </li>
+                    </ul>
+                </div>
+                <div class="chart ant-col-11 ant-col-offset-6 right">
+                    <div id="water">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="container">
+            <div class="ant-col-24">
+                <!--蛋白质分割线-->
+                <div class="hr-divider">
+                    <ul class="nav nav-pills hr-divider-content hr-divider-nav">
+                        <li class="nav-item">
+                            <p class="nav-link active down">蛋白质</p>
+                        </li>
+                    </ul>
+                </div>
+                <div class="chart ant-col-11 ant-col-offset-6 right">
+                    <div id="protein">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="ant-col-24">
+                <!--饱和脂肪分割线-->
+                <div class="hr-divider">
+                    <ul class="nav nav-pills hr-divider-content hr-divider-nav">
+                        <li class="nav-item">
+                            <p class="nav-link active down">饱和脂肪</p>
+                        </li>
+                    </ul>
+                </div>
+                <div class="chart ant-col-11 ant-col-offset-6 right">
+                    <div id="fat">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="ant-col-24">
+                <!--碳水化合物分割线-->
+                <div class="hr-divider">
+                    <ul class="nav nav-pills hr-divider-content hr-divider-nav">
+                        <li class="nav-item">
+                            <p class="nav-link active down">碳水化合物</p>
+                        </li>
+                    </ul>
+                </div>
+                <div class="chart ant-col-11 ant-col-offset-6 right">
+                    <div id="carbohydrate">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--运动数据分割线-->
+        <div class="ant-divider ant-divider-horizontal">
+            <h3 class="hr-divider-content hr-divider-heading"></h3>
+        </div>
+        <h3>运动数据</h3>
+
+        <div class="container">
+            <div class="ant-col-24">
+                <!--步数分割线-->
+                <div class="hr-divider">
+                    <ul class="nav nav-pills hr-divider-content hr-divider-nav">
+                        <li class="nav-item">
+                            <p class="nav-link btn-danger active down">步数</p>
+                        </li>
+                    </ul>
+                </div>
+                <div class="chart ant-col-11 ant-col-offset-6 right">
+                    <div id="step">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="ant-col-24">
+                <!--站立小时分割线-->
+                <div class="hr-divider">
+                    <ul class="nav nav-pills hr-divider-content hr-divider-nav">
+                        <li class="nav-item">
+                            <p class="nav-link btn-danger active down">站立小时</p>
+                        </li>
+                    </ul>
+                </div>
+                <div class="chart ant-col-11 ant-col-offset-6 right">
+                    <div id="stand">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="ant-col-24">
+                <!--已爬楼层分割线-->
+                <div class="hr-divider">
+                    <ul class="nav nav-pills hr-divider-content hr-divider-nav">
+                        <li class="nav-item">
+                            <p class="nav-link btn-danger active down">已爬楼层</p>
+                        </li>
+                    </ul>
+                </div>
+                <div class="chart ant-col-11 ant-col-offset-6 right">
+                    <div id="floor">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="ant-col-24">
+                <!--活动能量分割线-->
+                <div class="hr-divider">
+                    <ul class="nav nav-pills hr-divider-content hr-divider-nav">
+                        <li class="nav-item">
+                            <p class="nav-link btn-danger active down">活动能量</p>
+                        </li>
+                    </ul>
+                </div>
+                <div class="chart ant-col-11 ant-col-offset-6 right">
+                    <div id="energy">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script th:src="@{/js/jquery-3.3.1.js}"></script>
+<script th:src="@{/js/popper.js}"></script>
+<script th:src="@{/js/tablesorter.min.js}"></script>
+<script th:src="@{/js/application.js}"></script>
+<script th:src="@{/js/g2.min.js}"></script>
+<script th:src="@{https://gw.alipayobjects.com/os/antv/assets/data-set/0.8.6/data-set.min.js}"></script>
+<script th:src="@{/js/toolkit.js}"></script>
+
+<script id="waterChart" th:inline="javascript">
+    // 极坐标下的柱状图
+    // 构造数据
+    const dataWater1 = [];
+    for (let i = 0; i <= 100; i++) {
+        const item = {};
+        item.type = i + '';
+        item.value = 10;
+        dataWater1.push(item);
+    }
+
+    const dataWater2 = [];
+    var water = [[${water}]];
+    for (let i = 0; i <= 100; i++) {
+        const item = {};
+        item.type = i + '';
+        item.value = 10;
+        if (i === water) {
+            item.value = 12;
+        }
+        if (i > water) {
+            item.value = 0;
+        }
+        dataWater2.push(item);
+    }
+
+    const WaterChart = new G2.Chart({
+        container: 'water',
+        forceFit: true,
+        height: 450,
+        padding: 0,
+    });
+    WaterChart.scale({
+        type: {
+            range: [ 0, 1 ]
+        },
+        value: {
+            sync: true
+        }
+    });
+    WaterChart.legend(false);
+    WaterChart.tooltip(false);
+    const viewWater1 = WaterChart.view();
+    viewWater1.source(dataWater1);
+    viewWater1.axis(false);
+    viewWater1.coord('polar', {
+        startAngle: -9 / 8 * Math.PI,
+        endAngle: 1 / 8 * Math.PI,
+        innerRadius: 0.75,
+        radius: 0.8
+    });
+    viewWater1.interval().position('type*value')
+        .color('#CBCBCB')
+        .size(3);
+
+    const viewWater2 = WaterChart.view();
+    viewWater2.source(dataWater1, {
+        type: {
+            tickCount: 10
+        }
+    });
+    viewWater2.axis('value', false);
+    viewWater2.axis('type', {
+        grid: null,
+        line: null,
+        tickLine: null,
+        label: {
+            offset: -15,
+            textStyle: {
+                textAlign: 'center',
+                fill: '#CBCBCB',
+                fontSize: 18
+            },
+            formatter: val => {
+                if (val === '100') {
+                    return 100;
+                }
+                return val;
+            }
+        }
+    });
+    viewWater2.coord('polar', {
+        startAngle: -9 / 8 * Math.PI,
+        endAngle: 1 / 8 * Math.PI,
+        innerRadius: 0.95,
+        radius: 0.55
+    });
+    viewWater2.interval().position('type*value')
+        .color('#CBCBCB')
+        .size(3);
+
+    const viewWater3 = WaterChart.view();
+    var waterPercent = [[${waterPercent}]];
+    viewWater3.source(dataWater2);
+    viewWater3.axis(false);
+    viewWater3.coord('polar', {
+        startAngle: -9 / 8 * Math.PI,
+        endAngle: 1 / 8 * Math.PI,
+        innerRadius: 0.75,
+        radius: 0.8
+    });
+    viewWater3.interval().position('type*value')
+        .color('value', '#3023AE-#53A0FD')
+        .opacity(1)
+        .size(3);
+    viewWater3.guide().text({
+        position: [ '50%', '65%'],
+        content: waterPercent,
+        style: {
+            fill: '#CBCBCB',
+            fontSize: 64,
+            textAlign: 'center',
+            textBaseline: 'middle'
+        }
+    });
+
+    WaterChart.render();
+</script>
+<script id="proteinChart" th:inline="javascript">
+    // 极坐标下的柱状图
+    // 构造数据
+    const dataProtein1 = [];
+    for (let i = 0; i <= 100; i++) {
+        const item = {};
+        item.type = i + '';
+        item.value = 10;
+        dataProtein1.push(item);
+    }
+
+    const dataProtein2 = [];
+    var protein = [[${protein}]];
+    for (let i = 0; i <= 100; i++) {
+        const item = {};
+        item.type = i + '';
+        item.value = 10;
+        if (i === protein) {
+            item.value = 12;
+        }
+        if (i > protein) {
+            item.value = 0;
+        }
+        dataProtein2.push(item);
+    }
+
+    const chartProtein = new G2.Chart({
+        container: 'protein',
+        forceFit: true,
+        height: 450,
+        padding: 0,
+    });
+    chartProtein.scale({
+        type: {
+            range: [ 0, 1 ]
+        },
+        value: {
+            sync: true
+        }
+    });
+    chartProtein.legend(false);
+    chartProtein.tooltip(false);
+    const viewProtein1 = chartProtein.view();
+    viewProtein1.source(dataProtein1);
+    viewProtein1.axis(false);
+    viewProtein1.coord('polar', {
+        startAngle: -9 / 8 * Math.PI,
+        endAngle: 1 / 8 * Math.PI,
+        innerRadius: 0.75,
+        radius: 0.8
+    });
+    viewProtein1.interval().position('type*value')
+        .color('#CBCBCB')
+        .size(3);
+
+    const Protein = chartProtein.view();
+    Protein.source(dataProtein1, {
+        type: {
+            tickCount: 10
+        }
+    });
+    Protein.axis('value', false);
+    Protein.axis('type', {
+        grid: null,
+        line: null,
+        tickLine: null,
+        label: {
+            offset: -15,
+            textStyle: {
+                textAlign: 'center',
+                fill: '#CBCBCB',
+                fontSize: 18
+            },
+            formatter: val => {
+                if (val === '100') {
+                    return 100;
+                }
+                return val;
+            }
+        }
+    });
+    Protein.coord('polar', {
+        startAngle: -9 / 8 * Math.PI,
+        endAngle: 1 / 8 * Math.PI,
+        innerRadius: 0.95,
+        radius: 0.55
+    });
+    Protein.interval().position('type*value')
+        .color('#CBCBCB')
+        .size(3);
+
+    const viewProtein3 = chartProtein.view();
+    var proteinPercent = [[${proteinPercent}]];
+    viewProtein3.source(dataProtein2);
+    viewProtein3.axis(false);
+    viewProtein3.coord('polar', {
+        startAngle: -9 / 8 * Math.PI,
+        endAngle: 1 / 8 * Math.PI,
+        innerRadius: 0.75,
+        radius: 0.8
+    });
+    viewProtein3.interval().position('type*value')
+        .color('value', '#3023AE-#53A0FD')
+        .opacity(1)
+        .size(3);
+    viewProtein3.guide().text({
+        position: [ '50%', '65%'],
+        content: proteinPercent,
+        style: {
+            fill: '#CBCBCB',
+            fontSize: 64,
+            textAlign: 'center',
+            textBaseline: 'middle'
+        }
+    });
+
+    chartProtein.render();
+</script>
+<script id="fatChart" th:inline="javascript">
+    // 极坐标下的柱状图
+    // 构造数据
+    const dataFat1 = [];
+    for (let i = 0; i <= 100; i++) {
+        const item = {};
+        item.type = i + '';
+        item.value = 10;
+        dataFat1.push(item);
+    }
+
+    const dataFat2 = [];
+    var fat = [[${fat}]];
+    for (let i = 0; i <= 100; i++) {
+        const item = {};
+        item.type = i + '';
+        item.value = 10;
+        if (i === fat) {
+            item.value = 12;
+        }
+        if (i > fat) {
+            item.value = 0;
+        }
+        dataFat2.push(item);
+    }
+
+    const chartFat = new G2.Chart({
+        container: 'fat',
+        forceFit: true,
+        height: 450,
+        padding: 0
+    });
+    chartFat.forceFit();
+    chartFat.scale({
+        type: {
+            range: [ 0, 1 ]
+        },
+        value: {
+            sync: true
+        }
+    });
+    chartFat.legend(false);
+    chartFat.tooltip(false);
+    const viewFat1 = chartFat.view();
+    viewFat1.source(dataFat1);
+    viewFat1.axis(false);
+    viewFat1.coord('polar', {
+        startAngle: -9 / 8 * Math.PI,
+        endAngle: 1 / 8 * Math.PI,
+        innerRadius: 0.75,
+        radius: 0.8
+    });
+    viewFat1.interval().position('type*value')
+        .color('#CBCBCB')
+        .size(3);
+
+    const viewFat2 = chartFat.view();
+    viewFat2.source(dataFat1, {
+        type: {
+            tickCount: 10
+        }
+    });
+    viewFat2.axis('value', false);
+    viewFat2.axis('type', {
+        grid: null,
+        line: null,
+        tickLine: null,
+        label: {
+            offset: -15,
+            textStyle: {
+                textAlign: 'center',
+                fill: '#CBCBCB',
+                fontSize: 18
+            },
+            formatter: val => {
+                if (val === '100') {
+                    return 100;
+                }
+                return val;
+            }
+        }
+    });
+    viewFat2.coord('polar', {
+        startAngle: -9 / 8 * Math.PI,
+        endAngle: 1 / 8 * Math.PI,
+        innerRadius: 0.95,
+        radius: 0.55
+    });
+    viewFat2.interval().position('type*value')
+        .color('#CBCBCB')
+        .size(3);
+
+    const viewFat3 = chartFat.view();
+    var fatPercent = [[${fatPercent}]];
+    viewFat3.source(dataFat2);
+    viewFat3.axis(false);
+    viewFat3.coord('polar', {
+        startAngle: -9 / 8 * Math.PI,
+        endAngle: 1 / 8 * Math.PI,
+        innerRadius: 0.75,
+        radius: 0.8
+    });
+    viewFat3.interval().position('type*value')
+        .color('value', '#3023AE-#53A0FD')
+        .opacity(1)
+        .size(3);
+    viewFat3.guide().text({
+        position: [ '50%', '65%'],
+        content: fatPercent,
+        style: {
+            fill: '#CBCBCB',
+            fontSize: 64,
+            textAlign: 'center',
+            textBaseline: 'middle'
+        }
+    });
+
+    chartFat.render();
+</script>
+<script id="carbohydrateChart" th:inline="javascript">
+    // 极坐标下的柱状图
+    // 构造数据
+    const dataCarbohydrate1 = [];
+    for (let i = 0; i <= 100; i++) {
+        const item = {};
+        item.type = i + '';
+        item.value = 10;
+        dataCarbohydrate1.push(item);
+    }
+
+    const dataCarbohydrate2 = [];
+    var carbohydrate = [[${carbohydrate}]];
+    for (let i = 0; i <= 100; i++) {
+        const item = {};
+        item.type = i + '';
+        item.value = 10;
+        if (i === carbohydrate) {
+            item.value = 12;
+        }
+        if (i > carbohydrate) {
+            item.value = 0;
+        }
+        dataCarbohydrate2.push(item);
+    }
+
+    const chartCarbohydrate = new G2.Chart({
+        container: 'carbohydrate',
+        forceFit: true,
+        height: 450,
+        padding: 0
+    });
+    chartCarbohydrate.forceFit();
+    chartCarbohydrate.scale({
+        type: {
+            range: [ 0, 1 ]
+        },
+        value: {
+            sync: true
+        }
+    });
+    chartCarbohydrate.legend(false);
+    chartCarbohydrate.tooltip(false);
+    const viewCarbohydrate1 = chartCarbohydrate.view();
+    viewCarbohydrate1.source(dataCarbohydrate1);
+    viewCarbohydrate1.axis(false);
+    viewCarbohydrate1.coord('polar', {
+        startAngle: -9 / 8 * Math.PI,
+        endAngle: 1 / 8 * Math.PI,
+        innerRadius: 0.75,
+        radius: 0.8
+    });
+    viewCarbohydrate1.interval().position('type*value')
+        .color('#CBCBCB')
+        .size(3);
+
+    const viewCarbohydrate2 = chartCarbohydrate.view();
+    viewCarbohydrate2.source(dataCarbohydrate1, {
+        type: {
+            tickCount: 10
+        }
+    });
+    viewCarbohydrate2.axis('value', false);
+    viewCarbohydrate2.axis('type', {
+        grid: null,
+        line: null,
+        tickLine: null,
+        label: {
+            offset: -15,
+            textStyle: {
+                textAlign: 'center',
+                fill: '#CBCBCB',
+                fontSize: 18
+            },
+            formatter: val => {
+                if (val === '100') {
+                    return 100;
+                }
+                return val;
+            }
+        }
+    });
+    viewCarbohydrate2.coord('polar', {
+        startAngle: -9 / 8 * Math.PI,
+        endAngle: 1 / 8 * Math.PI,
+        innerRadius: 0.95,
+        radius: 0.55
+    });
+    viewCarbohydrate2.interval().position('type*value')
+        .color('#CBCBCB')
+        .size(3);
+
+    const viewCarbohydrate3 = chartCarbohydrate.view();
+    var carbohydratePercent = [[${carbohydratePercent}]];
+    viewCarbohydrate3.source(dataCarbohydrate2);
+    viewCarbohydrate3.axis(false);
+    viewCarbohydrate3.coord('polar', {
+        startAngle: -9 / 8 * Math.PI,
+        endAngle: 1 / 8 * Math.PI,
+        innerRadius: 0.75,
+        radius: 0.8
+    });
+    viewCarbohydrate3.interval().position('type*value')
+        .color('value', '#3023AE-#53A0FD')
+        .opacity(1)
+        .size(3);
+    viewCarbohydrate3.guide().text({
+        position: [ '50%', '65%'],
+        content: carbohydratePercent,
+        style: {
+            fill: '#CBCBCB',
+            fontSize: 64,
+            textAlign: 'center',
+            textBaseline: 'middle'
+        }
+    });
+
+    chartCarbohydrate.render();
+</script>
+<script id="stepChart" th:inline="javascript">
+    // 极坐标下的柱状图
+    // 构造数据
+    const dataStep1 = [];
+    for (let i = 0; i <= 100; i++) {
+        const item = {};
+        item.type = i + '';
+        item.value = 10;
+        dataStep1.push(item);
+    }
+
+    const dataStep2 = [];
+    var step = [[${step}]];
+    for (let i = 0; i <= 100; i++) {
+        const item = {};
+        item.type = i + '';
+        item.value = 10;
+        if (i === step) {
+            item.value = 12;
+        }
+        if (i > step) {
+            item.value = 0;
+        }
+        dataStep2.push(item);
+    }
+
+    const chartStep = new G2.Chart({
+        container: 'step',
+        forceFit: true,
+        height: 450,
+        padding: 0
+    });
+    chartStep.forceFit();
+    chartStep.scale({
+        type: {
+            range: [ 0, 1 ]
+        },
+        value: {
+            sync: true
+        }
+    });
+    chartStep.legend(false);
+    chartStep.tooltip(false);
+    const viewStep1 = chartStep.view();
+    viewStep1.source(dataStep1);
+    viewStep1.axis(false);
+    viewStep1.coord('polar', {
+        startAngle: -9 / 8 * Math.PI,
+        endAngle: 1 / 8 * Math.PI,
+        innerRadius: 0.75,
+        radius: 0.8
+    });
+    viewStep1.interval().position('type*value')
+        .color('#CBCBCB')
+        .size(3);
+
+    const viewStep2 = chartStep.view();
+    viewStep2.source(dataStep1, {
+        type: {
+            tickCount: 10
+        }
+    });
+    viewStep2.axis('value', false);
+    viewStep2.axis('type', {
+        grid: null,
+        line: null,
+        tickLine: null,
+        label: {
+            offset: -15,
+            textStyle: {
+                textAlign: 'center',
+                fill: '#CBCBCB',
+                fontSize: 18
+            },
+            formatter: val => {
+                if (val === '100') {
+                    return 100;
+                }
+                return val;
+            }
+        }
+    });
+    viewStep2.coord('polar', {
+        startAngle: -9 / 8 * Math.PI,
+        endAngle: 1 / 8 * Math.PI,
+        innerRadius: 0.95,
+        radius: 0.55
+    });
+    viewStep2.interval().position('type*value')
+        .color('#CBCBCB')
+        .size(3);
+
+    const viewStep3 = chartStep.view();
+    var stepPercent = [[${stepPercent}]];
+    viewStep3.source(dataStep2);
+    viewStep3.axis(false);
+    viewStep3.coord('polar', {
+        startAngle: -9 / 8 * Math.PI,
+        endAngle: 1 / 8 * Math.PI,
+        innerRadius: 0.75,
+        radius: 0.8
+    });
+    viewStep3.interval().position('type*value')
+        .color('value', '#3023AE-#FF6B56')
+        .opacity(1)
+        .size(3);
+    viewStep3.guide().text({
+        position: [ '50%', '65%'],
+        content: stepPercent,
+        style: {
+            fill: '#CBCBCB',
+            fontSize: 64,
+            textAlign: 'center',
+            textBaseline: 'middle'
+        }
+    });
+
+    chartStep.render();
+</script>
+<script id="standChart" th:inline="javascript">
+    // 极坐标下的柱状图
+    // 构造数据
+    const dataStand1 = [];
+    for (let i = 0; i <= 100; i++) {
+        const item = {};
+        item.type = i + '';
+        item.value = 10;
+        dataStand1.push(item);
+    }
+
+    const dataStand2 = [];
+    var stand = [[${stand}]];
+    for (let i = 0; i <= 100; i++) {
+        const item = {};
+        item.type = i + '';
+        item.value = 10;
+        if (i === stand) {
+            item.value = 12;
+        }
+        if (i > stand) {
+            item.value = 0;
+        }
+        dataStand2.push(item);
+    }
+
+    const chartStand = new G2.Chart({
+        container: 'stand',
+        forceFit: true,
+        height: 450,
+        padding: 0
+    });
+    chartStand.forceFit();
+    chartStand.scale({
+        type: {
+            range: [ 0, 1 ]
+        },
+        value: {
+            sync: true
+        }
+    });
+    chartStand.legend(false);
+    chartStand.tooltip(false);
+    const viewStand1 = chartStand.view();
+    viewStand1.source(dataStand1);
+    viewStand1.axis(false);
+    viewStand1.coord('polar', {
+        startAngle: -9 / 8 * Math.PI,
+        endAngle: 1 / 8 * Math.PI,
+        innerRadius: 0.75,
+        radius: 0.8
+    });
+    viewStand1.interval().position('type*value')
+        .color('#CBCBCB')
+        .size(3);
+
+    const viewStand2 = chartStand.view();
+    viewStand2.source(dataStand1, {
+        type: {
+            tickCount: 10
+        }
+    });
+    viewStand2.axis('value', false);
+    viewStand2.axis('type', {
+        grid: null,
+        line: null,
+        tickLine: null,
+        label: {
+            offset: -15,
+            textStyle: {
+                textAlign: 'center',
+                fill: '#CBCBCB',
+                fontSize: 18
+            },
+            formatter: val => {
+                if (val === '100') {
+                    return 100;
+                }
+                return val;
+            }
+        }
+    });
+    viewStand2.coord('polar', {
+        startAngle: -9 / 8 * Math.PI,
+        endAngle: 1 / 8 * Math.PI,
+        innerRadius: 0.95,
+        radius: 0.55
+    });
+    viewStand2.interval().position('type*value')
+        .color('#CBCBCB')
+        .size(3);
+
+    const viewStand3 = chartStand.view();
+    var standPercent = [[${standPercent}]];
+    viewStand3.source(dataStand2);
+    viewStand3.axis(false);
+    viewStand3.coord('polar', {
+        startAngle: -9 / 8 * Math.PI,
+        endAngle: 1 / 8 * Math.PI,
+        innerRadius: 0.75,
+        radius: 0.8
+    });
+    viewStand3.interval().position('type*value')
+        .color('value', '#3023AE-#FF6B56')
+        .opacity(1)
+        .size(3);
+    viewStand3.guide().text({
+        position: [ '50%', '65%'],
+        content: standPercent,
+        style: {
+            fill: '#CBCBCB',
+            fontSize: 64,
+            textAlign: 'center',
+            textBaseline: 'middle'
+        }
+    });
+
+    chartStand.render();
+</script>
+<script id="floorChart" th:inline="javascript">
+    // 极坐标下的柱状图
+    // 构造数据
+    const dataFloor1 = [];
+    for (let i = 0; i <= 100; i++) {
+        const item = {};
+        item.type = i + '';
+        item.value = 10;
+        dataFloor1.push(item);
+    }
+
+    const dataFloor2 = [];
+    var floor = [[${floor}]];
+    for (let i = 0; i <= 100; i++) {
+        const item = {};
+        item.type = i + '';
+        item.value = 10;
+        if (i === floor) {
+            item.value = 12;
+        }
+        if (i > floor) {
+            item.value = 0;
+        }
+        dataFloor2.push(item);
+    }
+
+    const chartFloor = new G2.Chart({
+        container: 'floor',
+        forceFit: true,
+        height: 450,
+        padding: 0
+    });
+    chartFloor.forceFit();
+    chartFloor.scale({
+        type: {
+            range: [ 0, 1 ]
+        },
+        value: {
+            sync: true
+        }
+    });
+    chartFloor.legend(false);
+    chartFloor.tooltip(false);
+    const viewFloor1 = chartFloor.view();
+    viewFloor1.source(dataFloor1);
+    viewFloor1.axis(false);
+    viewFloor1.coord('polar', {
+        startAngle: -9 / 8 * Math.PI,
+        endAngle: 1 / 8 * Math.PI,
+        innerRadius: 0.75,
+        radius: 0.8
+    });
+    viewFloor1.interval().position('type*value')
+        .color('#CBCBCB')
+        .size(3);
+
+    const viewFloor2 = chartFloor.view();
+    viewFloor2.source(dataFloor1, {
+        type: {
+            tickCount: 10
+        }
+    });
+    viewFloor2.axis('value', false);
+    viewFloor2.axis('type', {
+        grid: null,
+        line: null,
+        tickLine: null,
+        label: {
+            offset: -15,
+            textStyle: {
+                textAlign: 'center',
+                fill: '#CBCBCB',
+                fontSize: 18
+            },
+            formatter: val => {
+                if (val === '100') {
+                    return 100;
+                }
+                return val;
+            }
+        }
+    });
+    viewFloor2.coord('polar', {
+        startAngle: -9 / 8 * Math.PI,
+        endAngle: 1 / 8 * Math.PI,
+        innerRadius: 0.95,
+        radius: 0.55
+    });
+    viewFloor2.interval().position('type*value')
+        .color('#CBCBCB')
+        .size(3);
+
+    const viewFloor3 = chartFloor.view();
+    var floorPercent = [[${floorPercent}]];
+    viewFloor3.source(dataFloor2);
+    viewFloor3.axis(false);
+    viewFloor3.coord('polar', {
+        startAngle: -9 / 8 * Math.PI,
+        endAngle: 1 / 8 * Math.PI,
+        innerRadius: 0.75,
+        radius: 0.8
+    });
+    viewFloor3.interval().position('type*value')
+        .color('value', '#3023AE-#FF6B56')
+        .opacity(1)
+        .size(3);
+    viewFloor3.guide().text({
+        position: [ '50%', '65%'],
+        content: floorPercent,
+        style: {
+            fill: '#CBCBCB',
+            fontSize: 64,
+            textAlign: 'center',
+            textBaseline: 'middle'
+        }
+    });
+
+    chartFloor.render();
+</script>
+<script id="energyChart" th:inline="javascript">
+    // 极坐标下的柱状图
+    // 构造数据
+    const dataEnergy1 = [];
+    for (let i = 0; i <= 100; i++) {
+        const item = {};
+        item.type = i + '';
+        item.value = 10;
+        dataEnergy1.push(item);
+    }
+
+    const dataEnergy2 = [];
+    var energy = [[${energy}]];
+    for (let i = 0; i <= 100; i++) {
+        const item = {};
+        item.type = i + '';
+        item.value = 10;
+        if (i === energy) {
+            item.value = 12;
+        }
+        if (i > energy) {
+            item.value = 0;
+        }
+        dataEnergy2.push(item);
+    }
+
+    const chartEnergy = new G2.Chart({
+        container: 'energy',
+        forceFit: true,
+        height: 450,
+        padding: 0
+    });
+    chartEnergy.forceFit();
+    chartEnergy.scale({
+        type: {
+            range: [ 0, 1 ]
+        },
+        value: {
+            sync: true
+        }
+    });
+    chartEnergy.legend(false);
+    chartEnergy.tooltip(false);
+    const viewEnergy1 = chartEnergy.view();
+    viewEnergy1.source(dataEnergy1);
+    viewEnergy1.axis(false);
+    viewEnergy1.coord('polar', {
+        startAngle: -9 / 8 * Math.PI,
+        endAngle: 1 / 8 * Math.PI,
+        innerRadius: 0.75,
+        radius: 0.8
+    });
+    viewEnergy1.interval().position('type*value')
+        .color('#CBCBCB')
+        .size(3);
+
+    const viewEnergy2 = chartEnergy.view();
+    viewEnergy2.source(dataEnergy1, {
+        type: {
+            tickCount: 10
+        }
+    });
+    viewEnergy2.axis('value', false);
+    viewEnergy2.axis('type', {
+        grid: null,
+        line: null,
+        tickLine: null,
+        label: {
+            offset: -15,
+            textStyle: {
+                textAlign: 'center',
+                fill: '#CBCBCB',
+                fontSize: 18
+            },
+            formatter: val => {
+                if (val === '100') {
+                    return 100;
+                }
+                return val;
+            }
+        }
+    });
+    viewEnergy2.coord('polar', {
+        startAngle: -9 / 8 * Math.PI,
+        endAngle: 1 / 8 * Math.PI,
+        innerRadius: 0.95,
+        radius: 0.55
+    });
+    viewEnergy2.interval().position('type*value')
+        .color('#CBCBCB')
+        .size(3);
+
+    const viewEnergy3 = chartEnergy.view();
+    var energyPercent = [[${energyPercent}]];
+    viewEnergy3.source(dataEnergy2);
+    viewEnergy3.axis(false);
+    viewEnergy3.coord('polar', {
+        startAngle: -9 / 8 * Math.PI,
+        endAngle: 1 / 8 * Math.PI,
+        innerRadius: 0.75,
+        radius: 0.8
+    });
+    viewEnergy3.interval().position('type*value')
+        .color('value', '#3023AE-#FF6B56')
+        .opacity(1)
+        .size(3);
+    viewEnergy3.guide().text({
+        position: [ '50%', '65%'],
+        content: energyPercent,
+        style: {
+            fill: '#CBCBCB',
+            fontSize: 64,
+            textAlign: 'center',
+            textBaseline: 'middle'
+        }
+    });
+
+    chartEnergy.render();
+</script>
+</body>
+</html>

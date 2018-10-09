@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="icon" type="image/x-icon" th:href="@{/img/favicon.ico}">
+    <!-- These meta tags come first. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Ahza健康</title>
+
+    <!-- Include the CSS -->
+    <link th:href="@{/css/toolkit-light.css}" rel="stylesheet">
+    <link th:href="@{/css/application.css}" rel="stylesheet">
+    <link th:href="@{/css/docs.css}" rel="stylesheet">
+    <link th:href="@{/css/antd.css}" rel="stylesheet">
+
+    <style>
+        .bigIcon {
+            font-size: 72px;
+        }
+
+        .result_1 {
+            text-align: center;
+            width: 72%;
+            margin: 0 auto;
+        }
+
+        .result_2 {
+            margin: 0 auto;
+            max-width: 560px;
+            padding: 24px 0 8px;
+        }
+
+        .result_1 .extra {
+            background: #fafafa;
+            padding: 24px 40px;
+            border-radius: 2px;
+            text-align: left;
+        }
+
+        .label {
+            color: rgba(0, 0, 0, .85);
+            text-align: right;
+            padding-right: 8px;
+        }
+
+        .label_down {
+            margin-top: 5px;
+        }
+
+        .information {
+            line-height: 22px;
+        }
+
+        .ant-row:not(:last-child) {
+            margin-bottom: 24px;
+        }
+
+        .result_1 .title {
+            font-size: 24px;
+            color: rgba(0, 0, 0, .85);
+            font-weight: 500;
+            line-height: 32px;
+            margin-bottom: 16px;
+        }
+
+        .actions {
+            margin-top: 32px;
+        }
+    </style>
+</head>
+<body>
+<div class="col-md-12">
+    <div id="navbar">
+        <nav class="iconav">
+            <a class="iconav-brand" href="/goMain">
+                <img th:src="@{/img/ahza-white.png}" alt="ahzh" class="rounded-circle img-fluid">
+                <!--<span class="icon icon-gauge iconav-brand-icon"></span>-->
+            </a>
+            <div class="iconav-slider">
+                <ul class="nav nav-pills iconav-nav flex-md-column">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/goDashboard" title="仪表盘" data-toggle="tooltip" data-placement="right"
+                           data-container="body">
+                            <span class="icon icon-gauge"></span>
+                            <small class="iconav-nav-label d-md-none">仪表盘</small>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/goHealth" title="健康数据" data-toggle="tooltip"
+                           data-placement="right" data-container="body">
+                            <span class="icon icon-man"></span>
+                            <small class="iconav-nav-label d-md-none">健康数据</small>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/goGene" title="基因数据" data-toggle="tooltip" data-placement="right"
+                           data-container="body">
+                            <span class="icon icon-lab-flask"></span>
+                            <small class="iconav-nav-label d-md-none">基因数据</small>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/logout" title="登出系统" data-toggle="tooltip" data-placement="right"
+                           data-container="body">
+                            <!--<img src="../assets/img/avatar-mdo.png" alt="" class="rounded-circle img-fluid">-->
+                            <span class="icon icon-log-out"></span>
+                            <small class="iconav-nav-label d-md-none">登出系统</small>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+    <div class="container float-right col-md-11">
+        <h3>数据录入</h3>
+        <div>
+            <div class="docs-example">
+                <div class="ant-card">
+                    <!--步骤条-->
+                    <div class="col-md-8 offset-2">
+                        <div class="ant-steps ant-steps-horizontal ant-steps ant-steps-label-horizontal">
+                            <div class="ant-steps-item ant-steps-item-wai">
+                                <div class="ant-steps-item-tail"></div>
+                                <div class="ant-steps-item-icon">
+                                    <span class="ant-steps-icon">1</span>
+                                </div>
+                                <div class="ant-steps-item-content">
+                                    <div class="ant-steps-item-title">健身记录</div>
+                                </div>
+                            </div>
+                            <div class="ant-steps-item ant-steps-item-wai">
+                                <div class="ant-steps-item-tail"></div>
+                                <div class="ant-steps-item-icon">
+                                    <span class="ant-steps-icon">2</span>
+                                </div>
+                                <div class="ant-steps-item-content">
+                                    <div class="ant-steps-item-title">营养摄入</div>
+                                </div>
+                            </div>
+                            <div class="ant-steps-item ant-steps-item-process">
+                                <div class="ant-steps-item-tail"></div>
+                                <div class="ant-steps-item-icon">
+                                    <span class="ant-steps-icon">3</span>
+                                </div>
+                                <div class="ant-steps-item-content">
+                                    <div class="ant-steps-item-title">完成</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--结果内容-->
+                    <div class="result_1 result_2">
+                        <div class="ant-notification-notice-icon-success bigIcon">
+                            <i class="anticon anticon-check-circle ant-confirm-success"></i>
+                        </div>
+                        <div class="title">操作成功</div>
+                        <div class="extra">
+                            <div class="information">
+                                <div class="ant-row">
+                                    <div class="ant-col-8 label">水：</div>
+                                    <div class="ant-col-15 label_down"><span th:text="${water}"></span> 毫升</div>
+                                </div>
+                                <div class="ant-row">
+                                    <div class="ant-col-8 label">蛋白质：</div>
+                                    <div class="ant-col-15 label_down"><span th:text="${protein}"></span> 克</div>
+                                </div>
+                                <div class="ant-row">
+                                    <div class="ant-col-8 label">饱和脂肪：</div>
+                                    <div class="ant-col-15 label_down"><span th:text="${fat}"></span> 克</div>
+                                </div>
+                                <div class="ant-row">
+                                    <div class="ant-col-8 label">碳水化合物：</div>
+                                    <div class="ant-col-15 label_down"><span th:text="${carbohydrate}"></span> 克</div>
+                                </div>
+                                <div class="ant-row">
+                                    <div class="ant-col-8 label">步数：</div>
+                                    <div class="ant-col-15 label_down"><span th:text="${step}"></span> 步</div>
+                                </div>
+                                <div class="ant-row">
+                                    <div class="ant-col-8 label">活动能量：</div>
+                                    <div class="ant-col-15 label_down"><span th:text="${energy}"></span> 千卡</div>
+                                </div>
+                                <div class="ant-row">
+                                    <div class="ant-col-8 label">已爬楼层：</div>
+                                    <div class="ant-col-15 label_down"><span th:text="${floor}"></span> 层</div>
+                                </div>
+                                <div class="ant-row">
+                                    <div class="ant-col-8 label">站立小时：</div>
+                                    <div class="ant-col-15 label_down"><span th:text="${stand}"></span> 小时</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="actions">
+                            <button type="button" onclick="window.location.href='/goMain'"  class="ant-btn ant-btn-primary">
+                                <span>返回首页</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script th:src="@{/js/jquery-3.3.1.js}"></script>
+<script th:src="@{/js/popper.js}"></script>
+<script th:src="@{/js/tablesorter.min.js}"></script>
+<script th:src="@{/js/toolkit.js}"></script>
+<script th:src="@{/js/application.js}"></script>
+<script th:src="@{/js/component.js}"></script>
+<script th:src="@{/js/antd.js}"></script>
+</body>
+</html>
