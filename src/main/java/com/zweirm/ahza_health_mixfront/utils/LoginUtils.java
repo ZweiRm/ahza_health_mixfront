@@ -20,6 +20,7 @@ public class LoginUtils {
         HttpSession session = request.getSession();
 
         Cookie[] cookies = request.getCookies();
+        System.out.println(cookies.length);
         for (Cookie cookie : cookies) {
             System.out.println(cookie.getName());
             if (cookie.getName().equals("autoLogin")) {
@@ -30,6 +31,10 @@ public class LoginUtils {
         if (session.getAttribute("user") != null) {
             isLogin = true;
         }
+    }
+
+    public static void setLogin() {
+        isLogin = true;
     }
 
     public static void setLogout() {

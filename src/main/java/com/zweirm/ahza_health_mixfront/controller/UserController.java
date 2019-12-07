@@ -42,13 +42,11 @@ public class UserController {
             autoLoginCookie.setMaxAge(3600 * 24 * 30);
             autoLoginCookie.setPath(request.getContextPath() + "/");
             response.addCookie(autoLoginCookie);
-            LoginUtils.checkLogin();
         } else {
             Cookie autoLoginCookie = new Cookie("autoLogin", "");
             autoLoginCookie.setMaxAge(0);
             autoLoginCookie.setPath(request.getContextPath() + "/");
             response.addCookie(autoLoginCookie);
-            LoginUtils.checkLogin();
         }
 
         User user = userService.findUserByUsernameAndPassword(username, password);
@@ -58,7 +56,7 @@ public class UserController {
         } else {
             model.addAttribute("user", user);
             session.setAttribute("user", user);
-            LoginUtils.checkLogin();
+            LoginUtils.setLogin();
             return "/main";
         }
     }
@@ -93,4 +91,5 @@ public class UserController {
         LoginUtils.setLogout();
         return "/index";
     }
+
 }

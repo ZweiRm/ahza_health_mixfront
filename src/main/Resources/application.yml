@@ -3,16 +3,19 @@ spring:
     active: prod
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://127.0.0.1:3306/ahza_health?useSSL=false&useUnicode=true&characterEncoding=UTF-8
+    url: jdbc:mysql://127.0.0.1:3306/ahza_health?useSSL=false&useUnicode=true&characterEncoding=UTF-8&allowPublicKeyRetrieval=true
     username: root
-    password: 5094022aA
+    password: 1234567aA
   thymeleaf:
     encoding: UTF-8
     cache: false
     mode: HTML5
   jpa:
+    database-platform: org.hibernate.dialect.MySQL5Dialect
     hibernate:
       ddl-auto: update
     show-sql: true
 server:
   port: 8080
+  error:
+    path: /error/

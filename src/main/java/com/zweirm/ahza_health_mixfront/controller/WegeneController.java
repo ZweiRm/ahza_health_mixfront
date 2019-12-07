@@ -1,6 +1,7 @@
 package com.zweirm.ahza_health_mixfront.controller;
 
 import com.alibaba.fastjson.JSON;
+import com.zweirm.ahza_health_mixfront.domain.User;
 import com.zweirm.ahza_health_mixfront.domain.wegene.WegeneProfiles;
 import com.zweirm.ahza_health_mixfront.domain.wegene.WegeneToken;
 import com.zweirm.ahza_health_mixfront.domain.wegene.WegeneUser;
@@ -20,6 +21,7 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 @Controller
 public class WegeneController {
@@ -37,7 +39,7 @@ public class WegeneController {
         params.add("client_secret", "QSWNngHFZkVuDQeueZa24KGyHPbKhte6");
         params.add("grant_type", "authorization_code");
         params.add("code", code);
-        params.add("redirect_uri", "http://localhost:8080/goGeneResult/" + code);
+        params.add("redirect_uri", "https://health.ahza.xin/goGeneResult/" + code);
         params.add("scope", "basic health athletigen");
         String tokenJSON = httpClientService.client(url,method,params);
 
@@ -52,6 +54,7 @@ public class WegeneController {
 
         ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
         HttpServletRequest request = attributes.getRequest();
+
         WegeneToken token = (WegeneToken) request.getAttribute("token");
         String tokenStr = token.getAccess_token();
 
